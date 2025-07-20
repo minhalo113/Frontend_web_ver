@@ -127,6 +127,14 @@ const NavItems = () => {
                     </Link>
                   </li>
 
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                    >
+                      Contact
+                    </Link>
+                  </li>
                   <li >
                     <Link
                       href="/cart-page"
