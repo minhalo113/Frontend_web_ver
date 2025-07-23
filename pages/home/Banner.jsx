@@ -5,7 +5,7 @@ import api from '../../src/api/api';
 import HomeImageSwiper from '../../components/HomeImageSwiper';
 
 const title = (
-    <h2>Toys You <span>Love</span>, Prices You Won’t <span>Believe</span>!</h2>
+    <h2>Toys I <span>Love</span>, Prices You Won’t <span>Believe</span>!</h2>
 )
 
 const desc = "🎲 Endless Fun, One Small Price!"
