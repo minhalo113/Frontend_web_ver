@@ -112,8 +112,8 @@ const Banner = () => {
                     </form>
 
                     <p style={{marginBottom: "50px"}}>{desc}</p>
-                    <HomeImageSwiper />
                 </div>
+                <HomeImageSwiper />
             </div>
 
         </div>
