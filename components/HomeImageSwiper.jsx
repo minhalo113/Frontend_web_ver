@@ -8,40 +8,50 @@ const HomeImageSwiper = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const fetch = async () => {
+    (async () => {
       try {
         const { data } = await api.get('/home-swiper-get');
         setItems(data.items);
       } catch (err) {
         console.log(err);
       }
-    };
-    fetch();
+    })();
   }, []);
 
+  /* ---------- INLINE STYLES THAT MAKE IT FULL‑SCREEN ---------- */
+  const swiperStyle = {
+    position: 'absolute',  // let it sit under your text
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',       // fill the whole banner section
+    zIndex: 1,
+  };
+
+  const slideStyle = { width: '100%', height: '100%' };
+
+  const imgStyle = {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',   // crop to fill, no black bars
+  };
+
   return (
-    <div className="w-full">
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        modules={[Autoplay]}
-        className="w-full max-h-[500px]" 
-      >
-        {items.map((item) => (
-          <SwiperSlide key={item._id} className="flex justify-center items-center">
-            <a href={item.link} className="block w-full h-full">
-              <img
-                src={item.image.url}
-                className="mx-auto w-full max-h-[500px] object-contain"
-                alt="Banner"
-              />
-            </a>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      spaceBetween={0}
+      slidesPerView={1}
+      loop
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      modules={[Autoplay]}
+    >
+      {items.map((item) => (
+        <SwiperSlide key={item._id} style={slideStyle}>
+          <a href={item.link} style={{ display: 'block', width: '100%', height: '100%' }}>
+            <img src={item.image.url} alt='banner' style={imgStyle} />
+          </a>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
 

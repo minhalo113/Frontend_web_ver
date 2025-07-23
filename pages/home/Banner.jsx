@@ -81,6 +81,7 @@ const Banner = () => {
     }, []);
 
     return (
+        <div>
         <div className = "banner-section style-4" style = {{overflow: 'hidden', flexWrap:'wrap', paddingBottom: "50px"}}>
             <div className='container-fluid px-0'>
                 <div className='banner-content'>
@@ -113,9 +114,10 @@ const Banner = () => {
 
                     <p style={{marginBottom: "50px"}}>{desc}</p>
                 </div>
-                <HomeImageSwiper />
             </div>
 
+        </div>
+            <HomeImageSwiper />
         </div>
     )
 }
