@@ -82,7 +82,7 @@ const Banner = () => {
 
     return (
         <div className = "banner-section style-4" style = {{overflow: 'hidden', flexWrap:'wrap', paddingBottom: "50px"}}>
-            <div className='container'>
+            <div className='container-fluid'>
                 <div className='banner-content'>
                     {title}
                     <form style={{boxShadow: "0 0 0"}} ref={dropdownRef} onFocus={() => setShowDropdown(true)}>
