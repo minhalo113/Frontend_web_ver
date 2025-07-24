@@ -18,15 +18,6 @@ const HomeImageSwiper = () => {
     })();
   }, []);
 
-  /* ---------- INLINE STYLES THAT MAKE IT FULL‑SCREEN ---------- */
-  const swiperStyle = {
-    position: 'absolute',  // let it sit under your text
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',       // fill the whole banner section
-    zIndex: 1,
-  };
 
   const slideStyle = { width: '100%', height: '100%' };
 
