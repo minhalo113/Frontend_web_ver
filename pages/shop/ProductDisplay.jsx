@@ -85,12 +85,15 @@ const ProductDisplay = ({item}) => {
                                     {colorImages.map((img,i) => (
                                         <div key={i} className="relative">
                                             <img
-                                                src={img}
-                                                onClick={() => setSelectedColor(colors[i] || '')}
-                                                className={`w-8 h-8 border ${selectedColor === colors[i] ? 'border-2 border-emerald-600' : 'border-gray-300'} cursor-pointer`}
-                                            />
+                                            src={img}
+                                            onClick={() => setSelectedColor(colors[i] || '')}
+                                            className={`w-10 h-10 rounded cursor-pointer transition-all duration-200 ease-in-out ${
+                                                selectedColor === colors[i]
+                                                ? 'border-2 border-emerald-500 ring-2 ring-emerald-300'
+                                                : 'border border-gray-300'
+                                            }`}/>
                                             {selectedColor === colors[i] && (
-                                                <span className="absolute inset-0 flex items-center justify-center text-xs text-white bg-emerald-600/70 rounded-sm">✓</span>
+                                                <span className="absolute inset-0 flex items-center justify-center">{selectedColor}</span>
                                             )}
                                         </div>
                                     ))}
@@ -126,10 +129,14 @@ const ProductDisplay = ({item}) => {
                                             <img
                                                 src={img}
                                                 onClick={() => setSelectedType(types[i] || '')}
-                                                className={`w-8 h-8 border ${selectedType === types[i] ? 'border-2 border-emerald-600' : 'border-gray-300'} cursor-pointer`}
-                                            />
+                                                className={`w-10 h-10 rounded cursor-pointer transition-all duration-200 ease-in-out ${
+                                                    selectedColor === colors[i]
+                                                    ? 'border-2 border-emerald-500 ring-2 ring-emerald-300'
+                                                    : 'border border-gray-300'
+                                                }`}/>
+
                                             {selectedType === types[i] && (
-                                                <span className="absolute inset-0 flex items-center justify-center text-xs text-white bg-emerald-600/70 rounded-sm">✓</span>
+                                                <span className="absolute inset-0 flex items-center justify-center">{selectedType}</span>
                                             )}
                                         </div>
                                     ))}
