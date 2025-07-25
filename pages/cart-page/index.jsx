@@ -94,14 +94,14 @@ const CartPage = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th className="cat-product">Product</th>
+                                    <th>Product</th>
                                     <th>Color</th>
                                     <th>Size</th>
                                     <th>Type</th>
-                                    <th className="cat-price">Price</th>
-                                    <th className="cat-quantity">Quantity</th>
-                                    <th className="cat-toprice">Total</th>
-                                    <th className="cat-edit">Edit</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
 
