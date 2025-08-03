@@ -52,10 +52,12 @@ const ProductDisplay = ({item}) => {
 
     const handleSubmit = (e) => {
         const variantPrice = selectedColor && colorPrices[selectedColor] !== undefined ? colorPrices[selectedColor] : price;
+        const variantImage = (colorImages.length > 0 && selectedColor) ? colorImages[colors.indexOf(selectedColor)] : images;
+
         const product = {
             id: _id,
             cartId: `${_id}-${selectedColor || ''}-${selectedSize || ''}`,
-            img: images,
+            img: variantImage,
             name: name,
             price: variantPrice,
             discount: discount,
@@ -187,7 +189,6 @@ const ProductDisplay = ({item}) => {
                         </div>
                     )}
                  </div>
-
 
                 <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: "0.75rem" }}>
                 <button type="submit" className='lab-btn'
