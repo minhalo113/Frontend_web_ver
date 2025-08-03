@@ -68,7 +68,6 @@ const WishList = () => {
                     productId: product.productId,
                     color: product.color,
                     size: product.size,
-                    type: product.type
                 },
                 {withCredentials: true}
             );
