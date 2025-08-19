@@ -99,19 +99,71 @@ const CategoryShowCase = () => {
                                         </div>
                                         <div className='course-price' style={{color: "#DCA54A"}}>
                                             {(() => {
-                                                const hasVariant = product.colors && product.colors.length > 0 && product.colorPrices && Object.keys(product.colorPrices).length > 0;
-                                                if(hasVariant){
-                                                    const prices = product.colors.map(c => product.colorPrices[c]).filter(v=>v!==undefined);
+                                                const hasVariant =
+                                                    product.colors &&
+                                                    product.colors.length > 0 &&
+                                                    product.colorPrices &&
+                                                    Object.keys(product.colorPrices).length > 0;
+
+                                                if (hasVariant) {
+                                                    const prices = product.colors
+                                                        .map(c => product.colorPrices[c])
+                                                        .filter(v => v !== undefined);
                                                     const min = Math.min(...prices);
                                                     const max = Math.max(...prices);
                                                     const minBase = min.toFixed(2);
                                                     const maxBase = max.toFixed(2);
-                                                    if(minBase === maxBase){
-                                                        return `$${minBase}`;
-                                                    }else{
-                                                        return `$${minBase} - $${maxBase}`;
+                                                    if (product.discount > 0) {
+                                                        const minDiscount = (min - (min * product.discount) / 100).toFixed(2);
+                                                        const maxDiscount = (max - (max * product.discount) / 100).toFixed(2);
+
+                                                        if (minBase === maxBase) {
+                                                            return (
+                                                                <>
+                                                                    ${minDiscount}
+                                                                    <del className='text-sm text-gray-500 ml-1'>
+                                                                        ${minBase}
+                                                                    </del>
+                                                                </>
+                                                            );
+                                                        }
+
+                                                        return (
+                                                            <>
+                                                                ${minDiscount}
+                                                                <del className='text-sm text-gray-500 ml-1'>
+                                                                    ${minBase}
+                                                                </del>
+                                                                {` - `}
+                                                                ${maxDiscount}
+                                                                <del className='text-sm text-gray-500 ml-1'>
+                                                                    ${maxBase}
+                                                                </del>
+                                                            </>
+                                                        );
                                                     }
+
+                                                    if (minBase === maxBase) {
+                                                        return `$${minBase}`;
+                                                    }
+                                                    return `$${minBase} - $${maxBase}`;
                                                 }
+
+                                                if (product.discount > 0) {
+                                                    const discountedPrice = (
+                                                        product.price -
+                                                        (product.price * product.discount) / 100
+                                                    ).toFixed(2);
+                                                    return (
+                                                        <>
+                                                            ${discountedPrice}
+                                                            <del className='text-sm text-gray-500 ml-1'>
+                                                                ${product.price}
+                                                            </del>
+                                                        </>
+                                                    );
+                                                }
+
                                                 return `$${product.price}`;
                                             })()}
                                         </div>
