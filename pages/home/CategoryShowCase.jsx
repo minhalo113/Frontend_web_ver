@@ -2,6 +2,8 @@ import React,{useState, useEffect} from 'react'
 import api from '../../src/api/api.js'
 import Rating from '../../components/Rating'
 import Link from 'next/link'
+import DiscountBadge from '../../components/DiscountBadge'
+
 
 const title = "Our Products"
 const btnText = "Start Shopping Now";
@@ -83,8 +85,9 @@ const CategoryShowCase = () => {
                         <div key={product._id.toString()} className='col'>
                             <div className='course-item style-4'>
                             <div className='course-inner'>
-                                <div className='course-thumb'>
-                                    <img src = {Array.isArray(product.images) ? product.images[0] : product.images} alt='' />
+                                <div className='course-thumb relative'>
+                                    <img src={Array.isArray(product.images) ? product.images[0] : product.images} alt='' />
+                                    <DiscountBadge discount={product.discount} />
                                     <div className='course-category'>
                                         <div className='course-cate'><a href={`/shop/${product._id.toString()}`}>{product.category}</a></div>
                                         <div className='course-reiew'><Rating rating={product.averageRating} number_of_ratings= {product.reviewCount}/></div>
