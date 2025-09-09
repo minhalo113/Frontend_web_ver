@@ -19,7 +19,7 @@ const ProductSwiper = ({ images, videos, previewImage, onPreviewEnd }) => {
 
         if (previewImage) {
             swiper.autoplay?.stop();
-            // swiper.slideTo(0);
+            swiper.slideTo(0);
 
             const handleSlideChange = () => {
                 if (swiper.activeIndex !== 0) {
