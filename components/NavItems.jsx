@@ -94,7 +94,7 @@ const NavItems = () => {
                       <li>
                       <Link
                         href="/"
-                        className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                        className="inline-block transition-transform duration-200"
                       >
                         Home
                       </Link>
@@ -103,7 +103,7 @@ const NavItems = () => {
                     <li>
                     <Link
                       href="/shop"
-                      className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                      className="inline-block transition-transform duration-200"
                     >
                       Shop
                     </Link>
@@ -112,7 +112,7 @@ const NavItems = () => {
                   <li >
                     <Link
                       href="/blog"
-                      className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                      className="inline-block transition-transform duration-200"
                     >
                       Blog
                     </Link>
@@ -121,7 +121,7 @@ const NavItems = () => {
                   <li>
                     <Link
                       href="/about"
-                      className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                      className="inline-block transition-transform duration-200"
                     >
                       About
                     </Link>
@@ -130,7 +130,7 @@ const NavItems = () => {
                   <li>
                     <Link
                       href="/contact"
-                      className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                      className="inline-block transition-transform duration-200"
                     >
                       Contact
                     </Link>
@@ -138,7 +138,7 @@ const NavItems = () => {
                   <li >
                     <Link
                       href="/cart-page"
-                      className="inline-block transition-transform duration-200 hover:-translate-y-1"
+                      className="inline-block transition-transform duration-200"
                     >
                       Cart
                     </Link>
