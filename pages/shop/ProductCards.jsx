@@ -80,7 +80,46 @@ const ProductCards = ({GridList, products}) => {
                 maxDiscount: (max - (max * product.discount)/100).toFixed(2)
               };
             }
+            const oneVariant = product.colors && product.colors.length == 1 && Array.isArray(product.colorPrices) && product.colorPrices.length == 1;
             const discountedPrice = (!hasVariant && product.discount > 0) ? (product.price - (product.price * product.discount) / 100).toFixed(2) : null;
+            
+            const renderPrice = () => {
+              if (!oneVariant) {
+                  if (hasVariant) {
+                  if (product.discount > 0) {
+                      return (
+                      <>
+                          ${variantRange.minDiscount}
+                          <del className="text-sm text-gray-500 ml-1">${variantRange.minBase}</del>
+                          - ${variantRange.maxDiscount}
+                          <del className="text-sm text-gray-500 ml-1">${variantRange.maxBase}</del>
+                      </>
+                      );
+                  } else {
+                      return variantRange.minBase === variantRange.maxBase
+                      ? `$${variantRange.minBase}`
+                      : `$${variantRange.minBase} - $${variantRange.maxBase}`;
+                  }
+                  } else {
+                  return product.discount > 0 ? (
+                      <>
+                      ${discountedPrice}{' '}
+                      <del className="text-sm text-gray-500 ml-1">${product.price}</del>
+                      </>
+                  ) : (
+                      `$${product.price}`
+                  );
+                  }
+              } else {
+                  return product.discount > 0
+                  ? 
+                      <>
+                          ${variantRange.minDiscount}{' '}
+                          <del className="text-sm text-gray-500 ml-1">${variantRange.minBase}</del>
+                      </>
+                  : `$${variantRange.minBase}`;
+              }
+            };
             return(
             <div key = {i} className='col-lg-4 col-md-6 col-12'>
                 <div className='product-item'>
@@ -117,31 +156,7 @@ const ProductCards = ({GridList, products}) => {
                       <Rating rating={product.averageRating} number_of_ratings={product.reviewCount}/>
                     </p>
                     <h6>
-                      {hasVariant ? (
-                        product.discount > 0 ? (
-                          <>
-                            ${variantRange.minDiscount} 
-                            <del className='text-sm text-gray-500 ml-1'>
-                              ${variantRange.minBase}
-                            </del>
-                            - ${variantRange.maxDiscount}
-                            <del className='text-sm text-gray-500 ml-1'>
-                              ${variantRange.maxBase}
-                            </del>
-                          </>
-                        ) : (
-                          variantRange.minBase === variantRange.maxBase ? `$${variantRange.minBase}` : `$${variantRange.minBase} - $${variantRange.maxBase}`
-                        )
-                      ) : product.discount > 0 ? (
-                        <>
-                          ${discountedPrice}{` `}
-                          <del className='text-sm text-gray-500 ml-1'>
-                            ${product.price}
-                          </del>
-                        </>
-                      ) : (
-                        `$${product.price}`
-                      )}
+                      {renderPrice()}
                     </h6>
                     </div>
               </div>

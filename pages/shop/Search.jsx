@@ -251,9 +251,52 @@ const Search = ({products}) => {
                         const max = Math.max(...prices);
                         variantRange = {
                             minBase: min.toFixed(2),
-                            maxBase: max.toFixed(2)
+                            maxBase: max.toFixed(2),
+                            minDiscount: (min - (min * product.discount)/100).toFixed(2),
+                            maxDiscount: (max - (max * product.discount)/100).toFixed(2)
                         };
                     }
+                    const oneVariant = product.colors && product.colors.length == 1 && Array.isArray(product.colorPrices) && product.colorPrices.length == 1;
+                    const discountedPrice = (!hasVariant && product.discount > 0) ? (product.price - (product.price * product.discount) / 100).toFixed(2) : null;
+                    
+                    const renderPrice = () => {
+                        if (!oneVariant) {
+                            if (hasVariant) {
+                            if (product.discount > 0) {
+                                return (
+                                <>
+                                    ${variantRange.minDiscount}
+                                    <del className="text-sm text-gray-500 ml-1">${variantRange.minBase}</del>
+                                    - ${variantRange.maxDiscount}
+                                    <del className="text-sm text-gray-500 ml-1">${variantRange.maxBase}</del>
+                                </>
+                                );
+                            } else {
+                                return variantRange.minBase === variantRange.maxBase
+                                ? `$${variantRange.minBase}`
+                                : `$${variantRange.minBase} - $${variantRange.maxBase}`;
+                            }
+                            } else {
+                            return product.discount > 0 ? (
+                                <>
+                                ${discountedPrice}{' '}
+                                <del className="text-sm text-gray-500 ml-1">${product.price}</del>
+                                </>
+                            ) : (
+                                `$${product.price}`
+                            );
+                            }
+                        } else {
+                            return product.discount > 0
+                            ? 
+                                <>
+                                    ${variantRange.minDiscount}{' '}
+                                    <del className="text-sm text-gray-500 ml-1">${variantRange.minBase}</del>
+                                </>
+                            : `$${variantRange.minBase}`;
+                        }
+                        };
+
                     return(
                     <Link key = {product._id.toString()} href = {`/shop/${product._id.toString()}`}>
                         <div className='d-flex gap-3 p-2'>
@@ -270,7 +313,7 @@ const Search = ({products}) => {
                                     </Link>
                                 </p>
                                 <h6>
-                                    {hasVariant ? (variantRange.minBase === variantRange.maxBase ? `$${variantRange.minBase}` : `$${variantRange.minBase} - $${variantRange.maxBase}`) : `$${product.price}`}
+                                    {renderPrice()}
                                 </h6>
                             </div>
                         </div>
@@ -295,14 +338,15 @@ const Search = ({products}) => {
                         const matchSimilarity = Number(bestMatch?.similarity ?? match.similarity);
                         const matchKey = match.productId || `${match.productName}-${match.slug || ''}`;
 
+                        console.log(match)
                         return (
                             <Link key={matchKey} href={`/shop/${match.productId}`}>
                                 <div className='d-flex flex-column gap-2 p-2'>
                                     <div className='d-flex gap-3 align-items-center'>
                                         <div className='pro-thumb h-25'>
-                                            {bestMatch.imageUrl ? (
+                                            {previewUrl ? (
                                                 <img
-                                                    src={bestMatch.imageUrl}
+                                                    src={previewUrl}
                                                     alt={previewAlt}
                                                     style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }}
                                                 />
@@ -362,7 +406,7 @@ const Search = ({products}) => {
                                             })}
                                         </div>
                                     )} */}
-                                {!hasVariantMatches && bestMatch?.matchType === 'primary' && Array.isArray(match.primaryMatches) && match.primaryMatches.length > 1 && (
+                                {/* {!hasVariantMatches && bestMatch?.matchType === 'primary' && Array.isArray(match.primaryMatches) && match.primaryMatches.length > 1 && (
                                         <div className='d-flex flex-wrap gap-2 ps-1'>
                                             {match.primaryMatches.map((primary) => {
                                                 const primaryKey = `${primary.fingerprint || primary.index}-${primary.imageUrl}`;
@@ -385,7 +429,7 @@ const Search = ({products}) => {
                                                 );
                                             })}
                                         </div>
-                                    )}
+                                    )} */}
                                 </div>
                             </Link>
                         );
