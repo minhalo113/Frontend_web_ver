@@ -152,9 +152,9 @@ const Search = ({
         if (!onPriceRangeChange) return undefined;
 
         const handler = setTimeout(() => {
-            console.log(min, max)
             const min = parsePriceInput(localMinPrice);
             const max = parsePriceInput(localMaxPrice);
+            console.log(min, max)
             onPriceRangeChange({ min, max });
         }, PRICE_FILTER_DEBOUNCE);
 
