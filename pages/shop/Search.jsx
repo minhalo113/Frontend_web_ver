@@ -223,6 +223,7 @@ const Search = ({
     }, [localSearchTerm, localMinPrice, localMaxPrice]);
 
     const handleMinPriceInputChange = useCallback((event) => {
+        console.log("set min")
         const value = event.target.value.trim();
         if (value === '' || PRICE_INPUT_REGEX.test(value)) {
             setLocalMinPrice(value);
@@ -230,6 +231,7 @@ const Search = ({
     }, []);
 
     const handleMaxPriceInputChange = useCallback((event) => {
+        console.log("set max")
         const value = event.target.value.trim();
         if (value === '' || PRICE_INPUT_REGEX.test(value)) {
             setLocalMaxPrice(value);
