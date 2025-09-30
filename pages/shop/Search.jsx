@@ -192,6 +192,10 @@ const Search = ({
 
                 if (ignore) return;
 
+                console.log(parsedMin)
+                console.log(parsedMax)
+                console.log(data.results.minPrice, data.results.maxPrice)
+
                 setTextResults(Array.isArray(data?.results) ? data.results : []);
                 setTextSuggestions(Array.isArray(data?.suggestions) ? data.suggestions : []);
                 setTextSearchError('');
