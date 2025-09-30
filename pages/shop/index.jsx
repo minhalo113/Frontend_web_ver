@@ -202,6 +202,7 @@ const Shop = () => {
                     maxPrice = {maxPrice}
                     onPriceRangeChange= {handlePriceFilterChange}
                   />
+                  {/* {console.log(menuItems === undefined)} */}
                   <ShopCategory                     
                     filterItem ={filterItem}
                     menuItems={menuItems}
