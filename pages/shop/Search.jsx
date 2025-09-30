@@ -176,6 +176,8 @@ const Search = ({
             return undefined;
         }
 
+        console.log("hi1")
+
         let ignore = false;
         const timer = setTimeout(async () => {
             setIsTextSearching(true);
@@ -190,11 +192,12 @@ const Search = ({
                     withCredentials: true,
                 });
 
-                if (ignore) return;
-
+                console.log("hi2")
                 console.log(parsedMin)
                 console.log(parsedMax)
                 console.log(data.results.minPrice, data.results.maxPrice)
+
+                if (ignore) return;
 
                 setTextResults(Array.isArray(data?.results) ? data.results : []);
                 setTextSuggestions(Array.isArray(data?.suggestions) ? data.suggestions : []);
