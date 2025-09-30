@@ -148,10 +148,11 @@ const Search = ({
         };
     }, [localSearchTerm, onSearchTermChange]);
 
-        useEffect(() => {
+    useEffect(() => {
         if (!onPriceRangeChange) return undefined;
 
         const handler = setTimeout(() => {
+            console.log(min, max)
             const min = parsePriceInput(localMinPrice);
             const max = parsePriceInput(localMaxPrice);
             onPriceRangeChange({ min, max });
@@ -196,6 +197,7 @@ const Search = ({
                 console.log(parsedMin)
                 console.log(parsedMax)
                 console.log(data.results.minPrice, data.results.maxPrice)
+                console.log(data)
 
                 if (ignore) return;
 
