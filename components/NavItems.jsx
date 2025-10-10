@@ -135,6 +135,14 @@ const NavItems = () => {
                       Contact
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      href="/track-order"
+                      className="inline-block transition-transform duration-200"
+                    >
+                      Track Order
+                    </Link>
+                  </li>
                   <li >
                     <Link
                       href="/cart-page"
