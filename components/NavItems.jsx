@@ -171,7 +171,7 @@ const NavItems = () => {
                             }}>
                             <li><Link href="/profile" className="block py-1 custom-hover-override" style = {{paddingLeft: '2.5rem'}}>Profile</Link></li>
                             <li><Link href="/wishlist" className="block py-1 custom-hover-override" style = {{paddingLeft: '2.5rem'}}>Wishlist</Link></li>
-                            <li><Link href="/history" className="block py-1 custom-hover-override" style = {{paddingLeft: '2.5rem'}}>History</Link></li>
+                            <li><Link href="/history" className="block py-1 custom-hover-override" style = {{paddingLeft: '2.5rem'}}>Orders</Link></li>
                           </ul>
                         )}
 
