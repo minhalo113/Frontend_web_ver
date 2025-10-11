@@ -137,70 +137,71 @@ const Steps = [
 const ProgressSteps = ({ current, terminalLabel }) => {
   const total = Steps.length - 1;
   const step = Math.max(0, Math.min(current, total));
-  const fillPct = (step / total) * 100; // bar fill width
+
+  const DOT = 32;            // dot size (h-8 w-8)
+  const PAD = DOT / 2;       // 16px (center inset)
+  const GUTTER = 40;         // << shorter bar — was 12px, now 40px
+
+  const trackExpr = `calc(100% - ${(PAD + GUTTER) * 2}px)`;
+  const ratio = step / total;
+  const fillExpr  = `calc(${trackExpr} * ${ratio})`;
 
   return (
-    <div className="w-full">
-      {/* BAR */}
-      <div className="relative mx-2 my-3 h-2 rounded-full bg-slate-200">
-        {/* filled part */}
+    <div className="w-full overflow-hidden">
+      <div className="relative my-3" style={{ height: 2 }}>
+        {/* Base track */}
         <div
-          className="absolute left-0 top-0 h-2 rounded-full"
-          style={{ width: `${fillPct}%`, backgroundColor: BRAND }}
+          className="absolute top-0 h-2 rounded-full bg-slate-200"
+          style={{ left: PAD + GUTTER, right: PAD + GUTTER }}
+        />
+        {/* Filled segment */}
+        <div
+          className="absolute top-0 h-2 rounded-full transition-all duration-700 ease-in-out"
+          style={{ left: PAD + GUTTER, width: fillExpr, backgroundColor: BRAND }}
         />
 
-        {/* checkpoints */}
         {Steps.map((s, idx) => {
           const Icon = s.icon;
-          const leftPct = (idx / total) * 100;
+          const t = idx / total;
           const active = idx <= step;
+          const label = idx === total && terminalLabel ? terminalLabel : s.label;
+          const leftExpr = `calc(${PAD + GUTTER}px + (${trackExpr}) * ${t})`;
 
           return (
             <div
               key={s.key}
-              className="absolute -top-3"
-              style={{
-                left: `calc(${leftPct}% )`,
-                transform: "translateX(-50%)",
-              }}
+              className="absolute -top-3 flex flex-col items-center"
+              style={{ left: leftExpr, transform: "translateX(-50%)" }}
             >
               <div
-                className={`flex h-8 w-8 items-center justify-center rounded-full ring-2 transition-all`}
+                className="flex h-8 w-8 items-center justify-center rounded-full ring-2 transition-all"
                 style={{
+                  zIndex: 1,
                   backgroundColor: active ? BRAND : "#ffffff",
                   color: active ? "#ffffff" : "#475569",
+                  borderColor: active ? "transparent" : "#e2e8f0",
                   boxShadow: active ? "0 2px 6px rgba(0,0,0,0.15)" : "none",
-                  ringColor: active ? "rgba(220,165,74,0.35)" : "#e2e8f0",
                 }}
               >
                 <Icon size={16} />
+              </div>
+              <div
+                className={`mt-2 text-xs font-medium ${
+                  active ? "text-slate-900" : "text-slate-600"
+                }`}
+                style={{ minWidth: 64, textAlign: "center" }}
+              >
+                {label}
               </div>
             </div>
           );
         })}
       </div>
-
-      {/* LABELS (even, centered) */}
-      <div className="mt-6 grid grid-cols-4 items-start text-center text-xs">
-        {Steps.map((s, idx) => {
-          const label =
-            idx === Steps.length - 1 && terminalLabel ? terminalLabel : s.label;
-          const active = idx <= step;
-          return (
-            <div
-              key={s.key}
-              className={`px-1 font-medium ${
-                active ? "text-slate-900" : "text-slate-600"
-              }`}
-            >
-              {label}
-            </div>
-          );
-        })}
-      </div>
+      <div style={{ height: 34 }} />
     </div>
   );
 };
+
 
 
 function getCurrentStep(order) {
