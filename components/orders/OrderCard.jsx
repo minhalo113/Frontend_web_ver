@@ -33,14 +33,12 @@ const OrderCard = ({ order, expanded, onToggle }) => {
         </div>
       </div>
 
-      {/* Progress */}
       <div className="mt-5">
         <ProgressSteps current={currentStep} terminalLabel={terminalLabel(order)} />
       </div>
 
       <div className="my-5 h-px w-full bg-slate-200" />
 
-      {/* Ship to */}
       {(shippingInfo.address || shippingInfo.phoneNumber || shippingInfo.postalCode) && (
         <div className="m-1 text-sm leading-6 text-slate-600">
           <span className="font-medium text-slate-900">Ship to:</span>{" "}
@@ -50,7 +48,6 @@ const OrderCard = ({ order, expanded, onToggle }) => {
         </div>
       )}
 
-      {/* Toggle details */}
       <div className="mt-4 flex">
         <button
           type="button"
@@ -138,44 +135,73 @@ const Steps = [
 ];
 
 const ProgressSteps = ({ current, terminalLabel }) => {
+  const total = Steps.length - 1;
+  const step = Math.max(0, Math.min(current, total));
+  const fillPct = (step / total) * 100; // bar fill width
+
   return (
-    <div className="flex items-center justify-between gap-2">
-      {Steps.map((s, idx) => {
-        const active = idx <= current;
-        const Icon = s.icon;
+    <div className="w-full">
+      {/* BAR */}
+      <div className="relative mx-2 my-3 h-2 rounded-full bg-slate-200">
+        {/* filled part */}
+        <div
+          className="absolute left-0 top-0 h-2 rounded-full"
+          style={{ width: `${fillPct}%`, backgroundColor: BRAND }}
+        />
 
-        const label =
-          idx === Steps.length - 1 && terminalLabel ? terminalLabel : s.label;
+        {/* checkpoints */}
+        {Steps.map((s, idx) => {
+          const Icon = s.icon;
+          const leftPct = (idx / total) * 100;
+          const active = idx <= step;
 
-        return (
-          <div key={s.key} className="flex flex-1 items-center">
+          return (
             <div
-              className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs ${
-                active ? "border-transparent" : "border-slate-200"
-              }`}
-              style={active ? { backgroundColor: "rgba(220,165,74,0.12)", color: "#8f6a23" } : {}}
+              key={s.key}
+              className="absolute -top-3"
+              style={{
+                left: `calc(${leftPct}% )`,
+                transform: "translateX(-50%)",
+              }}
             >
               <div
-                className="flex h-6 w-6 items-center justify-center rounded-full"
-                style={active ? { backgroundColor: BRAND, color: "white" } : { backgroundColor: "#e2e8f0", color: "#475569" }}
+                className={`flex h-8 w-8 items-center justify-center rounded-full ring-2 transition-all`}
+                style={{
+                  backgroundColor: active ? BRAND : "#ffffff",
+                  color: active ? "#ffffff" : "#475569",
+                  boxShadow: active ? "0 2px 6px rgba(0,0,0,0.15)" : "none",
+                  ringColor: active ? "rgba(220,165,74,0.35)" : "#e2e8f0",
+                }}
               >
-                <Icon size={14} />
+                <Icon size={16} />
               </div>
-              <span className="font-medium">{label}</span>
             </div>
+          );
+        })}
+      </div>
 
-            {idx < Steps.length - 1 && (
-              <div
-                className="mx-2 h-0.5 flex-1 rounded"
-                style={{ backgroundColor: idx < current ? BRAND : "#e2e8f0" }}
-              />
-            )}
-          </div>
-        );
-      })}
+      {/* LABELS (even, centered) */}
+      <div className="mt-6 grid grid-cols-4 items-start text-center text-xs">
+        {Steps.map((s, idx) => {
+          const label =
+            idx === Steps.length - 1 && terminalLabel ? terminalLabel : s.label;
+          const active = idx <= step;
+          return (
+            <div
+              key={s.key}
+              className={`px-1 font-medium ${
+                active ? "text-slate-900" : "text-slate-600"
+              }`}
+            >
+              {label}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
+
 
 function getCurrentStep(order) {
   const ds = (order?.delivery_status || "").toLowerCase();
