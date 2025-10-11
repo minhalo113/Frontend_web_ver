@@ -3,14 +3,11 @@ import { ChevronDown, Clock, Package, Truck, CheckCircle2, XCircle } from "lucid
 
 const BRAND = "#DCA54A";
 
-/* ---------------------- MAIN ---------------------- */
-
 const OrderCard = ({ order, expanded, onToggle }) => {
   const isExpanded = expanded === order._id;
   const shippingInfo = order.shippingInfo || {};
 
-  const currentStep = getCurrentStep(order); // 0..3 per your status map
-
+  const currentStep = getCurrentStep(order); 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md">
       {/* Header */}
@@ -94,8 +91,6 @@ const OrderCard = ({ order, expanded, onToggle }) => {
   );
 };
 
-/* ------------------- BADGES & PROGRESS ------------------- */
-
 const StatusBadge = ({ group, value }) => {
   const tone = pickTone(group, value);
   const text = titleCase(value);
@@ -148,7 +143,7 @@ const ProgressSteps = ({ current, terminalLabel }) => {
       {Steps.map((s, idx) => {
         const active = idx <= current;
         const Icon = s.icon;
-        // if order is cancelled/returned, show custom label at the end
+
         const label =
           idx === Steps.length - 1 && terminalLabel ? terminalLabel : s.label;
 
@@ -182,38 +177,29 @@ const ProgressSteps = ({ current, terminalLabel }) => {
   );
 };
 
-/* ------------------------ HELPERS ------------------------ */
-
-/** Map your exact backend statuses to a 0..3 progress index. */
 function getCurrentStep(order) {
   const ds = (order?.delivery_status || "").toLowerCase();
   const os = (order?.order_status || "").toLowerCase();
   const ps = (order?.payment_status || "").toLowerCase();
 
-  // Terminal (end-of-journey) first
   if (["delivered", "returned", "cancelled"].includes(ds)) return 3;
 
-  // Shipping stages
   if (["shipped", "out for delivery"].includes(ds)) return 2;
   if (["processing", "warehouse"].includes(ds)) return 1;
 
-  // If delivery is still "pending", rely on order/payment
   if (ds === "pending") {
-    if (["accepted"].includes(os) || ["captured"].includes(ps)) return 1; // moving internally
-    return 0; // just placed
+    if (["accepted"].includes(os) || ["captured"].includes(ps)) return 1;
+    return 0; 
   }
 
-  // If no delivery_status yet, infer from order/payment
   if (["accepted"].includes(os)) return 1;
   if (["pending"].includes(os) || ["pending"].includes(ps) || ["uncaptured"].includes(ps)) return 0;
 
-  // Rejected anywhere → treat as terminal but “closed”
   if (os === "rejected" || ps === "rejected") return 3;
 
   return 0;
 }
 
-/** For the last step label when closed in a non-delivered state. */
 function terminalLabel(order) {
   const ds = (order?.delivery_status || "").toLowerCase();
   const os = (order?.order_status || "").toLowerCase();
@@ -225,7 +211,6 @@ function terminalLabel(order) {
   return undefined;
 }
 
-/** Pick badge tone per group/value using your enumerations. */
 function pickTone(group, raw) {
   const v = String(raw || "").toLowerCase();
 
@@ -261,8 +246,6 @@ function titleCase(s) {
   return String(s).replace(/[_-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-/* ---------------------- PROP TYPES ---------------------- */
-
 const InfoPair = ({ label, value }) => (
   <div className="flex flex-col text-center md:text-left">
     <span className="text-xs uppercase tracking-wide text-slate-500">{label}</span>
@@ -290,9 +273,9 @@ OrderCard.propTypes = {
     _id: PropTypes.string.isRequired,
     date: PropTypes.string,
     price: PropTypes.number,
-    payment_status: PropTypes.string, // uncaptured | captured | rejected | pending
-    order_status: PropTypes.string,   // pending | accepted | rejected
-    delivery_status: PropTypes.string, // pending | processing | warehouse | shipped | out for delivery | delivered | returned | cancelled
+    payment_status: PropTypes.string,
+    order_status: PropTypes.string,  
+    delivery_status: PropTypes.string, 
     shippingInfo: PropTypes.shape({
       address: PropTypes.string,
       phoneNumber: PropTypes.string,
