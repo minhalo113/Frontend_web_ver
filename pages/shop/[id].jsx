@@ -44,9 +44,9 @@ const SingleProduct = () => {
   return (
     <div>
         <SEO
-            title={`${productData.name} | Toy Haven Store`}
+            title={`${productData.name} | A Figure A Day`}
             description={productData.description}
-            canonical={`https://www.toyhaven.store/product/${productData._id}`}
+            canonical={`https://www.afigureaday.com/product/${productData._id}`}
             keywords={productData.name}
             image={productData?.images?.[0]}
         />
@@ -62,7 +62,7 @@ const SingleProduct = () => {
                                         <div className='product-thumb relative'>
                                             <DiscountBadge discount={productData.discount} />
                                             <div className='swiper-container pro-single-top'>
-                                    <ProductSwiper images={productData.images} videos={productData.videos} previewImage={previewImage} onPreviewEnd={() => setPreviewImage(null)}/>
+                                                                                                <ProductSwiper images={productData.images} videos={productData.videos} previewImage={previewImage} onPreviewEnd={() => setPreviewImage(null)}/>
                                             </div>
                                         </div>
                                     </div>
