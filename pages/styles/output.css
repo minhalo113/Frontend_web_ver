@@ -3369,6 +3369,15 @@
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
   }
+  .px-10 {
+    padding-inline: calc(var(--spacing) * 10);
+  }
+  .px-\[3rem\] {
+    padding-inline: 3rem;
+  }
+  .px-\[10rem\] {
+    padding-inline: 10rem;
+  }
   .py-0 {
     padding-block: calc(var(--spacing) * 0);
   }
@@ -3390,8 +3399,14 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
+  }
+  .py-\[2rem\] {
+    padding-block: 2rem;
   }
   .ps-0 {
     padding-inline-start: calc(var(--spacing) * 0);
