@@ -29,7 +29,7 @@ const ChatCustomer = () => {
             localStorage.setItem('chatUserId', id)
         }
 
-        const socket = io(process.env.NEXT_PUBLIC_SOCKE_URL || 'http://localhost:5000', {
+        const socket = io(process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5000', {
             query: { userId: id, userName: user?.name || 'guest', userEmail: user?.email || 'guest-email' }
           });
         
