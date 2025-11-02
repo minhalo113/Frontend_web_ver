@@ -15,7 +15,7 @@ const AnnouncementBar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setMessage(messages[Math.floor(Math.random() * messages.length)]);
-    }, 6000); // change every 6 seconds (optional)
+    }, 6000); 
 
     return () => clearInterval(interval);
   }, []);
