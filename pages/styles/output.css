@@ -2548,9 +2548,6 @@
   .mx-0 {
     margin-inline: calc(var(--spacing) * 0);
   }
-  .mx-0\.5 {
-    margin-inline: calc(var(--spacing) * 0.5);
-  }
   .mx-1 {
     margin-inline: calc(var(--spacing) * 1);
   }
