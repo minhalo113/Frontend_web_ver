@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.afigureaday.com/" />
         <meta property="og:image" content="/images/about-figures.jpg" />
-        <link rel="icon" href="/images/logo/myLogo.png" />
+        <link rel="icon" href="/myLogoResize.png" />
     </Head>
       <CartProvider>
 
