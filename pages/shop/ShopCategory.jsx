@@ -18,7 +18,7 @@ const ShopCategory = ({filterItem, menuItems, selectedCategory, categoryFacets, 
             <h4>All Categories</h4>
         </div>
  
-         <div className='widget-wrapper'>
+         <div className='widget-wrapper category-scrollable'>
             <button onClick={() => filterItem("all")} className={`m-2 ${selectedCategory === "all" ? "bg-warning" : ""}`}>
               All{formattedTotal ? ` (${formattedTotal})` : ''}
             </button>
