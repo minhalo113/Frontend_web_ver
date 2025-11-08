@@ -17,27 +17,5 @@
 }
 .header-section.style-4 .menu > ul li > button.button-custom-hover-override:hover {
   background: #D09A40 !important;
- }
-
-.widget .category-scrollable {
-  max-height: 18.75rem;
-  overflow-y: auto;
-  padding-right: 0.25rem;
-  scrollbar-width: thin;
-  scrollbar-color: #d09a40 transparent;
 }
-
-.widget .category-scrollable::-webkit-scrollbar {
-  width: 6px;
-}
-
-.widget .category-scrollable::-webkit-scrollbar-thumb {
-  background-color: #d09a40;
-  border-radius: 9999px;
-}
-
-.widget .category-scrollable::-webkit-scrollbar-track {
-  background: transparent;
-}
-
   
