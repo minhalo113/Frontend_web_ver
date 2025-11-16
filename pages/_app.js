@@ -57,9 +57,10 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.afigureaday.com/" />
         <meta property="og:image" content="/images/about-figures.jpg" />
-        <link rel="icon" type="image/png" sizes="48x48" href="https://www.afigureaday.com/favicon.png" />
-        <link rel="shortcut icon" href="https://www.afigureaday.com/favicon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="https://www.afigureaday.com/favicon.png" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
     </Head>
       <CartProvider>
 
