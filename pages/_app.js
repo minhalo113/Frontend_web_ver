@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps }) {
           content="anime figures, collectible statues, a figure a day, scale figures, anime merch"
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.afigureaday.com/" />
+         <link rel="canonical" href={`https://www.afigureaday.com${router.asPath}`} />
         <meta property="og:title" content="A Figure A Day | Daily Deals on Collectible Figures" />
         <meta
           property="og:description"
