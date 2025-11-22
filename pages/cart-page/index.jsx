@@ -5,6 +5,7 @@ import {useCart} from "../../context/CartContext"
 
 import api from './../../src/api/api';
 import { AuthContext } from '../../context/AuthContext';
+import SEO from '../../components/SEO';
 
 const CartPage = () => {
     const {cart: cartItems, add, remove, clear, handleQuantityChange} = useCart();
@@ -68,6 +69,7 @@ const CartPage = () => {
             if (user){
                 is_login = user
             }
+
             const {data} = await api.post("/create-payment-session", {
                 cartItems, shipping, is_login, couponId: coupon.id, discount: coupon.discount
             });
@@ -85,6 +87,12 @@ const CartPage = () => {
 
   return (
     <div>
+        <SEO
+            title="Shopping Cart | A Figure A Day"
+            description="Review your cart and proceed to checkout for curated anime figures from A Figure A Day."
+            canonical="https://www.afigureaday.com/cart-page"
+            noindex
+        />
         <PageHeader title = {"Shop Cart"} curPage={"Shop Cart"}/> 
 
         <div className='shop-cart padding-tb'>
