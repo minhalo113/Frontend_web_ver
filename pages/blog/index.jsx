@@ -4,26 +4,43 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import api from '../../src/api/api';
 import SEO from "../../components/SEO";
+import Paginations from '../shop/Paginations';
 
 export const Blog = () => {
   const [blogList, setBlogList] = useState([])
+  const [totalBlogs, setTotalBlogs] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const blogsPerPage = 30
 
   useEffect(() => {
     const fetchData = async () => {
+      setBlogList([])
       try {
         const response = await api.get('/get_blogs', {
+          params: {
+            page: currentPage,
+            parPage: blogsPerPage
+          },
           withCredentials: true
         });
-  
-        setBlogList(response.data.blogs);
-        console.log('Fetched blogs:', response.data.blogs);
+
+        const blogs = Array.isArray(response.data.blogs) ? response.data.blogs : []
+        const totalCount = Number(response.data.totalBlogs)
+
+        setBlogList(blogs)
+        setTotalBlogs(Number.isFinite(totalCount) ? totalCount : 0)
       } catch (err) {
         console.log('Error fetching blogs:', err);
       }
     };
-  
+
     fetchData();
-  }, []);  
+  }, [currentPage]);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div>
@@ -40,7 +57,7 @@ export const Blog = () => {
             <div className='row row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center g-4'>
               {
                 blogList.map((blog, i) => (
-                  <div key = {i} className='col'>
+                  <div key = {blog._id || i} className='col'>
                     <div className='post-item'>
                       <div className='post-inner'>
 
@@ -55,11 +72,11 @@ export const Blog = () => {
                           <div className='meta-post'>
                             <ul className='lab-ul'>
                               {
-                                blog.metaList.map((val, i) => {
+                                Array.isArray(blog.metaList) && blog.metaList.map((val, i) => (
                                   <li key = {i}>
                                     <i className= {val.iconName}></i> {val.text}
                                   </li>
-                                })
+                                ))
                               }
                             </ul>
                           </div>
@@ -85,6 +102,14 @@ export const Blog = () => {
                   </div>
                 ))
               }
+            </div>
+            <div className='paginations text-center mt-5'>
+              <Paginations
+                productsPerPage={blogsPerPage}
+                totalProducts={totalBlogs}
+                paginate={paginate}
+                activePage={currentPage}
+              />
             </div>
           </div>
         </div>
