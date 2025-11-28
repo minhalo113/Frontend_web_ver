@@ -105,7 +105,7 @@ const ChatCustomer = () => {
               onChange={(e) => setText(e.target.value)}
               className="flex-1 px-3 py-1 rounded-md border text-sm border-gray-300 focus:outline-none focus:border-[#DCA54A]"
               placeholder="Type a message..."
-              disabled={isConnecting} // Disable khi đang kết nối
+              disabled={isConnecting}
             />
             <button disabled={isConnecting} className="bg-[#DCA54A] text-white text-sm px-4 py-1 rounded-md hover:brightness-110">
               Send
