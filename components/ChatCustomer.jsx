@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useEffect, useState, useContext, useRef } from "react";
 
 // import dotenv from "dotenv"
