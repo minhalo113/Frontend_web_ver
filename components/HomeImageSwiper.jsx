@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import api from '../src/api/api';
+import Image from 'next/image';
+import PropTypes from 'prop-types';
 import 'swiper/css';
 
-const HomeImageSwiper = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await api.get('/home-swiper-get');
-        setItems(data.items);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
-
-
-  const slideStyle = { width: '100%', height: '100%' };
-
-  const imgStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',   // crop to fill, no black bars
-  };
+const HomeImageSwiper = ({ items = [] }) => {
 
   return (
-    <Swiper
-      spaceBetween={0}
-      slidesPerView={1}
-      loop
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
-      modules={[Autoplay]}
-    >
-      {items.map((item) => (
-        <SwiperSlide key={item._id} style={slideStyle}>
-          <a href={item.link} style={{ display: 'block', width: '100%', height: '100%' }}>
-            <img src={item.image.url} alt='banner' style={imgStyle} />
-          </a>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="w-full">
+      <Swiper
+        spaceBetween={0}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        modules={[Autoplay]}
+        className="w-full max-h-[500px]"
+      >
+        {items.map((item, index) => (
+          <SwiperSlide key={item._id} className="flex justify-center items-center">
+            <a href={item.link} className="block w-full h-full relative" style={{ height: '500px' }}>
+              <Image
+                src={item.image.url}
+                alt="Banner"
+                fill
+                sizes="100vw"
+                style={{ objectFit: 'contain' }}
+                priority={index === 0}
+              />
+            </a>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
+};
+
+HomeImageSwiper.propTypes = {
+  items: PropTypes.array,
 };
 
 export default HomeImageSwiper;
