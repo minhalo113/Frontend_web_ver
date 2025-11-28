@@ -73,7 +73,7 @@ const Banner = ({ products = [], categorys = [], swiperItems = [] }) => {
         <div>
             <div className="banner-section style-4" style={{ overflow: 'hidden', flexWrap: 'wrap', paddingBottom: "50px", position: 'relative' }}>
 
-                {/* <Image
+                <Image
                     src="/images/bg-img/shopBackground.jpg"
                     alt="A Figure A Day Shop Background"
                     fill
@@ -86,7 +86,7 @@ const Banner = ({ products = [], categorys = [], swiperItems = [] }) => {
                         zIndex: -1,
                         pointerEvents: 'none'
                     }}
-                /> */}
+                />
 
                 <div className='container-fluid px-0'>
                     <div className='banner-content'>
