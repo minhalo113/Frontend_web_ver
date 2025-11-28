@@ -77,8 +77,6 @@ const Banner = ({ products = [], categorys = [], swiperItems = [] }) => {
                     src="/images/bg-img/shopBackground.jpg"
                     alt="A Figure A Day Shop Background"
                     fill
-                    priority={true}
-                    fetchPriority="high"
                     quality={80}
                     sizes="100vw"
                     style={{
