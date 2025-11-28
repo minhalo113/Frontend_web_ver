@@ -11,7 +11,7 @@ const ChatCustomer = () => {
   const [messages, setMessages] = useState([])
   const [text, setText] = useState('')
   const [hasMounted, setHasMounted] = useState(false)
-  // Loading state
+
   const [isConnecting, setIsConnecting] = useState(false);
 
   const [unread, setUnread] = useState(false);
@@ -94,6 +94,9 @@ const ChatCustomer = () => {
                 </span>
               </div>
             ))}
+            <div className="text-xs text-gray-500 text-center mb-2 mt-1">
+              ⏳ Please note: Admin replies may take up to 24–48 hours.
+            </div>
           </div>
 
           <form onSubmit={send} className="p-2 flex gap-2 border-t border-gray-200">
@@ -102,7 +105,7 @@ const ChatCustomer = () => {
               onChange={(e) => setText(e.target.value)}
               className="flex-1 px-3 py-1 rounded-md border text-sm border-gray-300 focus:outline-none focus:border-[#DCA54A]"
               placeholder="Type a message..."
-              disabled={isConnecting}
+              disabled={isConnecting} // Disable khi đang kết nối
             />
             <button disabled={isConnecting} className="bg-[#DCA54A] text-white text-sm px-4 py-1 rounded-md hover:brightness-110">
               Send
