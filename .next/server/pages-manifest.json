@@ -3,9 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/about": "pages/about.js",
-  "/shop": "pages/shop.js",
-  "/track-order": "pages/track-order.js",
   "/cart-page": "pages/cart-page.js",
   "/contact": "pages/contact.js"
 }
