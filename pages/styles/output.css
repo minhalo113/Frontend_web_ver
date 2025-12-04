@@ -4150,6 +4150,13 @@
       }
     }
   }
+  .hover\:text-blue-400 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-blue-400);
+      }
+    }
+  }
   .hover\:text-emerald-400 {
     &:hover {
       @media (hover: hover) {
