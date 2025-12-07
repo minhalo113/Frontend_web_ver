@@ -70,11 +70,8 @@ const ShopWrapper = ({ productType = 'all' }) => {
             try {
                 const params = {};
                 if (productType && productType !== 'all') {
-                    // Map internal types to obfuscated query params for backend call
-                    // direct -> maps to dropship on backend (if updated) or we handle mapping here
-                    // But user wants route name in network tab to be obfuscated.
-                    // So we send 'direct' or 'global-finds' to backend.
-                    if (productType === 'dropship') params.type = 'direct';
+
+                    if (productType === 'standard') params.type = 'direct';
                     else if (productType === 'affiliate') params.type = 'global-finds';
                     else params.type = productType;
                 }
@@ -156,9 +153,7 @@ const ShopWrapper = ({ productType = 'all' }) => {
         setSelectedCategory(normalizedCategory);
         setCurrentPage(1);
         const query = normalizedCategory === 'all' ? {} : { category: normalizedCategory };
-        // Preserve other query params like type if needed, but here we are using URL query for shop root not state
-        // Actually, if we are in /shop/affiliate, the route is different.
-        // If we are in /shop?type=affiliate, we need to preserve it.
+
         const newQuery = { ...router.query, ...query };
         if (normalizedCategory === 'all') delete newQuery.category;
 
@@ -195,7 +190,7 @@ const ShopWrapper = ({ productType = 'all' }) => {
 
     const pageTitleMap = {
         'all': 'Our Shop Page',
-        'dropship': 'Direct Store',
+        'standard': 'Direct Store',
         'affiliate': 'Global Finds'
     };
 
@@ -220,7 +215,7 @@ const ShopWrapper = ({ productType = 'all' }) => {
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className={`nav-link ${productType === 'dropship' ? 'active' : ''}`} href="/shop/direct-store" onClick={(e) => { e.preventDefault(); router.push('/shop/direct-store'); }}>
+                        <a className={`nav-link ${productType === 'standard' ? 'active' : ''}`} href="/shop/direct-store" onClick={(e) => { e.preventDefault(); router.push('/shop/direct-store'); }}>
                             Direct Store
                         </a>
                     </li>
@@ -230,7 +225,7 @@ const ShopWrapper = ({ productType = 'all' }) => {
                         </a>
                     </li>
                 </ul>
-                {productType === 'dropship' && (
+                {productType === 'standard' && (
                     <div className="mt-3 text-muted">
                         <small>Professional grade products sent directly from our warehouse partners.</small>
                     </div>
