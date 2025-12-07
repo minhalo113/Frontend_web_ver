@@ -1,1 +1,9 @@
-{}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/shop/direct-store": "pages/shop/direct-store.js",
+  "/": "pages/index.js",
+  "/shop": "pages/shop.js",
+  "/shop/global-finds": "pages/shop/global-finds.js"
+}

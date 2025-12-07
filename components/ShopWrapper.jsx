@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import PageHeader from './PageHeader'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import ProductCards from '../pages/shop/ProductCards';
 import Paginations from '../pages/shop/Paginations';
@@ -206,30 +207,108 @@ const ShopWrapper = ({ productType = 'all' }) => {
             />
             <PageHeader title={title} curPage="Shop" />
 
-            {/* Navigation Tabs */}
-            <div className="container mt-4">
-                <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                        <a className={`nav-link ${productType === 'all' ? 'active' : ''}`} href="/shop" onClick={(e) => { e.preventDefault(); router.push('/shop'); }}>
-                            All
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className={`nav-link ${productType === 'standard' ? 'active' : ''}`} href="/shop/direct-store" onClick={(e) => { e.preventDefault(); router.push('/shop/direct-store'); }}>
-                            Direct Store
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className={`nav-link ${productType === 'affiliate' ? 'active' : ''}`} href="/shop/global-finds" onClick={(e) => { e.preventDefault(); router.push('/shop/global-finds'); }}>
-                            Global Finds
-                        </a>
-                    </li>
-                </ul>
-                {productType === 'standard' && (
-                    <div className="mt-3 text-muted">
-                        <small>Professional grade products sent directly from our warehouse partners.</small>
+            <div style={{ marginTop: "2rem", marginBottom: "1.5rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+
+                    <div
+                        style={{
+                            display: "inline-flex",
+                            backgroundColor: "#f3f4f6",
+                            padding: "4px",
+                            borderRadius: "9999px",
+                            boxShadow: "inset 0 0 4px rgba(0,0,0,0.05)"
+                        }}
+                    >
+
+                        <Link
+                            href="/shop"
+                            style={{
+                                padding: "8px 24px",
+                                borderRadius: "9999px",
+                                fontSize: "0.875rem",
+                                fontWeight: 600,
+                                textDecoration: "none",
+                                transition: "all 0.3s",
+                                backgroundColor: productType === "all" ? "#ffffff" : "transparent",
+                                color: productType === "all" ? "#059669" : "#6b7280",
+                                boxShadow: productType === "all" ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
+                                cursor: "pointer"
+                            }}
+                        >
+                            All Collection
+                        </Link>
+
+                        <Link
+                            href="/shop/direct-store"
+                            style={{
+                                padding: "8px 24px",
+                                borderRadius: "9999px",
+                                fontSize: "0.875rem",
+                                fontWeight: 600,
+                                textDecoration: "none",
+                                transition: "all 0.3s",
+                                backgroundColor: productType === "standard" ? "#ffffff" : "transparent",
+                                color: productType === "standard" ? "#059669" : "#6b7280",
+                                boxShadow: productType === "standard" ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Direct Store 🇨🇦
+                        </Link>
+
+                        <Link
+                            href="/shop/global-finds"
+                            style={{
+                                padding: "8px 24px",
+                                borderRadius: "9999px",
+                                fontSize: "0.875rem",
+                                fontWeight: 600,
+                                textDecoration: "none",
+                                transition: "all 0.3s",
+                                backgroundColor: productType === "affiliate" ? "#ffffff" : "transparent",
+                                color: productType === "affiliate" ? "#f97316" : "#6b7280",
+                                boxShadow: productType === "affiliate" ? "0 1px 4px rgba(0,0,0,0.1)" : "none",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Global Finds 🌍
+                        </Link>
+
                     </div>
-                )}
+
+                    {productType === "standard" && (
+                        <div style={{ marginTop: "1rem", textAlign: "center", maxWidth: "32rem" }}>
+                            <p style={{
+                                color: "#047857",
+                                fontSize: "0.875rem",
+                                backgroundColor: "#ecfdf5",
+                                padding: "8px 16px",
+                                borderRadius: "0.5rem",
+                                border: "1px solid #d1fae5",
+                                display: "inline-block"
+                            }}>
+                                ✨ Professional grade accessories sent directly from our warehouse partners.
+                            </p>
+                        </div>
+                    )}
+
+                    {productType === "affiliate" && (
+                        <div style={{ marginTop: "1rem", textAlign: "center", maxWidth: "32rem" }}>
+                            <p style={{
+                                color: "#c2410c",
+                                fontSize: "0.875rem",
+                                backgroundColor: "#fff7ed",
+                                padding: "8px 16px",
+                                borderRadius: "0.5rem",
+                                border: "1px solid #ffedd5",
+                                display: "inline-block"
+                            }}>
+                                🌍 Products sourced from international marketplaces.
+                            </p>
+                        </div>
+                    )}
+
+                </div>
             </div>
 
             <div className='shop-page padding-tb'>
